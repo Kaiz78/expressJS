@@ -22,4 +22,4 @@ function generateToken() {
   return [...Array(50)].map(i=>(~~(Math.random()*36)).toString(36)).join('');
 }
 
-  export default { toObject,generateToken };
+export default { toObject,generateToken };
