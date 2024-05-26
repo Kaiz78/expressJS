@@ -1,5 +1,5 @@
 # Example Dockerfile for each microservice (user-service, workspace-service, etc.)
-FROM node:14
+FROM node:16
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -9,8 +9,13 @@ COPY package*.json ./
 
 RUN npm install
 
+
 # Bundle app source
 COPY . .
+
+# Générez Prisma
+RUN npx prisma generate
+
 
 # Expose port
 EXPOSE 4000

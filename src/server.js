@@ -4,7 +4,7 @@ import passport from 'passport';
 import './config/passport.js';
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 4000;
 
 
 // Start server

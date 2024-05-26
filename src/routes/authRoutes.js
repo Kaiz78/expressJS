@@ -16,9 +16,17 @@ router.post('/change-password', authMiddleware, changePassword);
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+
+router.get('/google/callback', passport.authenticate('google', { session: false }), 
+(req, res) => {
   const token = jwt.sign({ userId: req.user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.json({ token });
+  
+  // Sauvegarde du token dans les cookies
+  res.cookie('token', token, { httpOnly: true });
+  res.redirect(301, `${process.env.CLIENT_URL}`);
 });
+
+
+
 
 export default router;
