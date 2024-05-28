@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma.js';
 import object from '../utils/object.js';
-
+import sendEmail from '../config/emailConfig.js';
 
 const invalidatedTokens = new Set();
 
@@ -37,6 +37,15 @@ const register = async (req, res) => {
         validate_token: validateToken,
       },
     });
+
+    // Send email
+    const subject = 'Account Verification';
+    const text = `Click on the link to verify your account: ${process.env.CLIENT_URL}/verify-account/${validateToken}`;
+    
+    const html = `<p>Click on the link to verify your account: <a href="${process.env.CLIENT_URL1}/api/verify/${validateToken}">${process.env.CLIENT_URL1}/api/verify/${validateToken}</a></p>`;
+
+    await sendEmail(email, subject, text, html);
+
 
     // convert BigInt to String
     newUser = object.toObject(newUser);

@@ -23,3 +23,19 @@ prisma init
 npx prisma generate
 npm run start
 ```
+
+# Lancement avec Docker
+
+1. Change the configuration .env
+```bash
+cp .env.example .env
+```
+
+2. Build the image
+```bash
+docker-compose up --build
+```
+
+3. Test application
+
+- http://localhost:4000
